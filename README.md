@@ -1,2 +1,2 @@
 # Seefood
-iOS app that uses IBM Watson to identify camera images
+iOS app that uses IBM Bluex, a pre-trained visual recognition framework, to identify camera images
