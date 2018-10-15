@@ -26,8 +26,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="FS1-rF-BDo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AN3-kQ-q9o"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FS1-rF-BDo" secondAttribute="bottom" id="Bz5-dm-WNz"/>
-                            <constraint firstItem="FS1-rF-BDo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="PFl-54-Omr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FS1-rF-BDo" secondAttribute="trailing" id="e8M-FY-tTE"/>
                             <constraint firstItem="FS1-rF-BDo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="px0-VD-TCj"/>
                         </constraints>

@@ -9,10 +9,14 @@
 import UIKit
 import VisualRecognitionV3
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
+    
+    var choices = ["waterfalls","trees","water","flowers","hotdog"]
+    var pickerView = UIPickerView()
+    var typeValue = String()
     
     let apiKey = "41T3884Bc5ufPS3fwMi-PjP4WQA_I8ZF_tfn4WIaJ_Ls"
     let imagePicker = UIImagePickerController()
@@ -22,6 +26,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        typeValue = choices[0]
+        showAlert()
         imagePicker.delegate = self
         imagePicker.sourceType = .savedPhotosAlbum
         imagePicker.allowsEditing = false
@@ -49,29 +55,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
                 print(self.classificationResults)
                 
-                let word = "waterfalls"
+                let word = self.typeValue
                 
                 if self.classificationResults.contains(where: {$0.caseInsensitiveCompare(word) == .orderedSame}) {
                     DispatchQueue.main.async {
-                        self.navigationItem.title = "Waterfalls!"
+                        self.navigationItem.title = self.typeValue + "!"
                     }
                 }
                 else {
                     DispatchQueue.main.async {
-                        self.navigationItem.title = "Not Waterfalls!"
+                        self.navigationItem.title = "Not " + self.typeValue + "!"
                     }
                 }
-                
-//                if self.classificationResults.contains("Waterfalls") {
-//                    DispatchQueue.main.async {
-//                        self.navigationItem.title = "Waterfalls!"
-//                    }
-//                }
-//                else {
-//                    DispatchQueue.main.async {
-//                        self.navigationItem.title = "Not Waterfalls!"
-//                    }
-//                }
             }
         } else {
             print("There was an error picking the image")
@@ -85,5 +80,51 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(imagePicker, animated: true, completion: nil)
     }
     
+    //MARK - PickerView
+  func showAlert() {
+        let alert = UIAlertController(title: "Choices", message: "\n\n\n\n\n\n", preferredStyle: .alert)
+        alert.isModalInPopover = true
+        
+        let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
+        
+        alert.view.addSubview(pickerFrame)
+        pickerFrame.dataSource = self
+        pickerFrame.delegate = self
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (UIAlertAction) in
+            
+            print("You selected " + self.typeValue )
+            
+        }))
+        self.present(alert,animated: true, completion: nil )
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return choices.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return choices[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if row == 0 {
+            typeValue = choices[0]
+        } else if row == 1 {
+            typeValue = choices[1]
+        } else if row == 2 {
+            typeValue = choices[2]
+        } else if row == 3 {
+            typeValue = choices[3]
+        } else if row == 4 {
+            typeValue = choices[4]
+        }
+    }
 }
 
