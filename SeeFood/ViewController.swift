@@ -14,7 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     
-    var choices = ["waterfalls","trees","water","flowers","hotdog"]
+    var choices = ["waterfalls","mountain","dog","rabbit", "hamburger", "pizza", "hotdog"]
     var pickerView = UIPickerView()
     var typeValue = String()
     
@@ -26,10 +26,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Whatsit"
+        imageView.image = UIImage(named: "azurehorsecreations")!
         typeValue = choices[0]
         showAlert()
         imagePicker.delegate = self
-        imagePicker.sourceType = .savedPhotosAlbum
+        imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false
     }
 
@@ -74,7 +76,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
-        imagePicker.sourceType = .savedPhotosAlbum
+        imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false
         
         present(imagePicker, animated: true, completion: nil)
