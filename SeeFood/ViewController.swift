@@ -14,7 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     
-    var choices = ["waterfalls","trees","water","flowers","hotdog"]
+    var choices = ["waterfalls","mountain","dog","rabbit","hamburger","pizza","hotdog"]
     var pickerView = UIPickerView()
     var typeValue = String()
     
@@ -26,6 +26,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Whatsit"
         typeValue = choices[0]
         showAlert()
         imagePicker.delegate = self
@@ -48,7 +49,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let classes = classifiedImages.images.first!.classifiers.first!.classes
                 
                 self.classificationResults = []
-                self.navigationItem.title = ""
                 
                 for index in 0..<classes.count {
                     self.classificationResults.append(classes[index].className)
@@ -74,6 +74,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
+        self.navigationItem.title = ""
         imagePicker.sourceType = .savedPhotosAlbum
         imagePicker.allowsEditing = false
         
@@ -114,6 +115,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
+        typeValue = choices[0]
+        
         if row == 0 {
             typeValue = choices[0]
         } else if row == 1 {
@@ -124,6 +127,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             typeValue = choices[3]
         } else if row == 4 {
             typeValue = choices[4]
+        } else if row == 5 {
+            typeValue = choices[5]
+        } else if row == 6 {
+            typeValue = choices[6]
+        } else if row == 7 {
+            typeValue = choices[7]
         }
     }
 }
