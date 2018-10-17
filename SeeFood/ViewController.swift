@@ -26,7 +26,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Whatsit"
+        navigationItem.title = "Whatsit"
+        imageView.image = UIImage(named: "azurehorsecreations")!
         typeValue = choices[0]
         showAlert()
         imagePicker.delegate = self
