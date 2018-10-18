@@ -8,6 +8,7 @@
 
 import UIKit
 import VisualRecognitionV3
+import SVProgressHUD
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -36,6 +37,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        SVProgressHUD.show()
+        
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
             imagePicker.dismiss(animated: true, completion: nil)
@@ -60,11 +64,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 
                 if self.classificationResults.contains(where: {$0.caseInsensitiveCompare(word) == .orderedSame}) {
                     DispatchQueue.main.async {
+                        SVProgressHUD.dismiss()
                         self.navigationItem.title = self.typeValue + "!"
                     }
                 }
                 else {
                     DispatchQueue.main.async {
+                        SVProgressHUD.dismiss()
                         self.navigationItem.title = "Not " + self.typeValue + "!"
                     }
                 }
